@@ -46,7 +46,15 @@ Succesful response template:
 
 ## How does it work?
 
-I am proposing to different solutions:
+This system receives lists of tasks by its available endpoint.
+It saves the received tasks in a table of the db. The table saves the task name, resources, profit and creation timestamp. It also assign it an id in order to diferentiate tasks that might have the same name.
+After saving the tasks, it retrieves from the database all the transactions that are queued to be processed. With all those tasks, it looks for the higher profit subset, which we will cover next.
+Tasks in the database have three possible status:
+- IN_QUEUE: meaning it hasn't been included in a profitable set yet.
+- PROCESSING: meaning that it has been selected in a profitable set.
+- PROCESSED: this would mean that the task has been effectively executed. We are not using it for now as we are not getting this info from the responsible of executing tasks.
+
+To look for profitable sets of tasks, I am proposing to different solutions:
 
 ### Solution 1: Exploring *all* possible subsets of compatible tasks
 
