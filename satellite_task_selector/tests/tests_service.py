@@ -98,12 +98,17 @@ class TasksServiceTests(SimpleTestCase):
             input_tasks)
         self.assertEqual(executable_tasks.tasks, expected_result)
 
-    def test_get_executable_tasks_with_same_profits(self):
+    def test_get_profitable_tasks_with_no_incompatible_items_quadratic_algorithm(self):
         input_tasks = [
+            {
+                "name": "upgrade to v2.1",
+                "resources": ['proc'],
+                "profit": 2.3
+            },
             {
                 "name": "run healthcheck",
                 "resources": [],
-                "profit": 5
+                "profit": 0.4
             },
             {
                 "name": "capture for client 1509",
@@ -113,12 +118,6 @@ class TasksServiceTests(SimpleTestCase):
                 ],
                 "profit": 5
             },
-            {
-                "name": "upgrade to v2.1",
-                "resources": ['proc'],
-                "profit": 5
-            },
-
         ]
         expected_result = [
             {
@@ -132,14 +131,54 @@ class TasksServiceTests(SimpleTestCase):
             {
                 "name": "upgrade to v2.1",
                 "resources": ['proc'],
-                "profit": 5
+                "profit": 2.3
             },
             {
                 "name": "run healthcheck",
                 "resources": [],
-                "profit": 5
+                "profit": 0.4
             },
         ]
-        executable_tasks = self.service.get_most_profitable_subset_of_tasks(
+        executable_tasks = self.service.find_most_profitable_subset_among_some_compatible_subsets(
+            input_tasks)
+        self.assertEqual(executable_tasks.tasks, expected_result)
+
+    def test_get_executable_tasks_with_incompatible_items_quadratic_algorithm(self):
+        input_tasks = [
+            {
+                "name": "capture for client 1509",
+                "resources": [
+                    "disk",
+                    "cam"
+                ],
+                "profit": 5
+            },
+            {
+                "name": "upgrade to v2.1",
+                "resources": ['proc'],
+                "profit": 2.3
+            },
+            {
+                "name": "clean disk",
+                "resources": ['disk'],
+                "profit": 0.4
+            },
+        ]
+        expected_result = [
+            {
+                "name": "capture for client 1509",
+                "resources": [
+                    "disk",
+                    "cam"
+                ],
+                "profit": 5
+            },
+            {
+                "name": "upgrade to v2.1",
+                "resources": ['proc'],
+                "profit": 2.3
+            },
+        ]
+        executable_tasks = self.service.find_most_profitable_subset_among_some_compatible_subsets(
             input_tasks)
         self.assertEqual(executable_tasks.tasks, expected_result)

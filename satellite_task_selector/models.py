@@ -24,8 +24,8 @@ class Task(models.Model):
 
     @classmethod
     def save_tasks(cls, tasks):
-        task_models = [cls(name=task["name"], resources=task["resources"],
-                           profit=task["profit"]) for task in tasks]
+        task_models = [cls(name=task['name'], resources=task['resources'],
+                           profit=task['profit']) for task in tasks]
         cls.objects.bulk_create(task_models)
 
     @classmethod

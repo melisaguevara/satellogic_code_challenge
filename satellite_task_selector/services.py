@@ -44,7 +44,7 @@ class TasksService:
         for task in input_tasks_list:
             new_subsets = []
             for tasks_subset in subsets:
-                if tasks_subset.do_not_conflict_with(task["resources"]):
+                if tasks_subset.do_not_conflict_with(task['resources']):
                     # Create a NEW subset with the previous elements + the new task
                     new_subset = TasksSubset(tasks_subset)
                     new_subset.add_task(task)
@@ -112,8 +112,8 @@ class TasksSubset:
 
     def add_task(self, new_task):
         self.tasks.append(new_task)
-        self.resources.update(new_task["resources"])
-        self.total_profit += new_task["profit"]
+        self.resources.update(new_task['resources'])
+        self.total_profit += new_task['profit']
 
     def merge_subsets(self, new_subset):
         self.tasks = self.tasks + new_subset.tasks
