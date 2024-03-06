@@ -14,10 +14,12 @@ System to find the 'higher profit' subset in a list of tasks.
 ### Without Docker
 
 1. Clone this repo
-2. Create a new PostgreSQL database called 'satellogic_tasks_db'
-3. Setup your database configuration in the settings.py file. Lookup for the 'DATABASES.default' dictionary
-4. Placed in the root folder run `python manage.py migrate` and `python manage.py runserver`
-5. The server will be up in port 8000
+2. Go back one folder and create a virtual env `python -m venv venv`
+3. Placed in the root folder of the repo, install requirements with `pip install -r requirements.txt`
+4. Create a new PostgreSQL database called 'satellogic_tasks_db'
+5. Setup your database configuration in the satellogic/settings.py file. Lookup for the 'DATABASES.default' dictionary
+6. Placed in the root folder run `python manage.py migrate` and `python manage.py runserver`
+7. The server will be up in port 8000
 
 ## Available endpoint
 
@@ -33,7 +35,7 @@ Expected body:
 ] 
 ```
 
-Response template:
+Succesful response template:
 ```
 {
   "tasks": [ // List of tasks of the 'higher profit' subset ],
@@ -68,4 +70,3 @@ In these graphs we can see the results of a little simulation of how both soluti
 ![image](https://github.com/melisaguevara/satellogic_code_challenge/assets/56703907/e91a4ec4-677a-4782-8e5d-e1227ad1e5a5)
 
 Other options might include storing the task list as a graph. They would be worth exploring if their time complexity is lower than O(n^2).
-
