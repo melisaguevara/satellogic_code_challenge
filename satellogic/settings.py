@@ -76,22 +76,14 @@ WSGI_APPLICATION = 'satellogic.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'satellite_tasks_db',
-    #     'USER': 'myuser',
-    #     'PASSWORD': 'mypassword',
-    #     'HOST': 'satellite_tasks_db_container',
-    #     'PORT': '5432',
-    # },
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'satellite_tasks_db',
-        'USER': 'postgres',
-        'PASSWORD': 'asdf123',
-        'HOST': 'localhost',
+        'USER': 'myuser',
+        'PASSWORD': 'mypassword',
+        'HOST': 'satellite_tasks_db_container',
         'PORT': '5432',
-    }
+    },
 }
 
 
